@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <properties resource="jdbc.properties"></properties>
+    <!--    &lt;!&ndash;定义别名&ndash;&gt;-->
+    <!--    <typeAliases>-->
+    <!--        <typeAlias type="com.xxx.entity.User" alias="user"/>-->
+    <!--    </typeAliases>-->
+    <settings>
+        <!--其他配置-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--定义别名-->
+    <typeAliases>
+        <package name="com.xxx.entity"/>
+    </typeAliases>
+    <!--
+plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+properties?, settings?,
+typeAliases?, typeHandlers?,
+objectFactory?,objectWrapperFactory?,
+plugins?,
+environments?, databaseIdProvider?, mappers?
+-->
+<!--    <plugins>-->
+<!--        &lt;!&ndash; com.github.pagehelper为PageHelper类所在包名 &ndash;&gt;-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+<!--            &lt;!&ndash;数据库方言&ndash;&gt;-->
+<!--            <property name="helperDialect" value="mysql"/>-->
+<!--            &lt;!&ndash;合理化分页&ndash;&gt;-->
+<!--            <property name="reasonable" value="true"/>-->
+<!--        </plugin>-->
+<!--    </plugins>-->
+
+    <!-- 1.数据库连接信息-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="jdbc"></transactionManager>
+            <dataSource type="com.xxx.datasource.DruidDataSourceFactory">
+                <property name="url" value="${jdbc.url}"/>
+                <property name="driverClassName" value="${jdbc.driver}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="password" value="123456"/>
+                <property name="initialSize" value="10"/>
+                <property name="maxActive" value="20"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.xxx.mapper"/>
+    </mappers>
+
+
+</configuration>
