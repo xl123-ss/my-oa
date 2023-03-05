@@ -60,4 +60,25 @@ public class MyBatisUtils {
     }
 
 
+    public static Object executeQueryMapper(Function<SqlSession, Object> function) {
+        SqlSession session = getSession(true);//自动回滚
+        return function.apply(session);
+    }
+
+    public static Object executeUpdateMapper(Function<SqlSession, Object> function) {
+        SqlSession session = getSession(false);//手动提交
+        try {
+            Object obj = function.apply(session);
+            //手动提交
+            session.commit();
+            return obj;
+        } catch (Exception e) {
+            session.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+
 }

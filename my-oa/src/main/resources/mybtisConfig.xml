@@ -13,11 +13,21 @@
     <settings>
         <!--其他配置-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="SLF4J"/>
     </settings>
     <!--定义别名-->
     <typeAliases>
         <package name="com.xxx.entity"/>
     </typeAliases>
+<!--    <typeHandlers>-->
+<!--        <typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.LocalTimeTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.OffsetDateTimeTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.OffsetTimeTypeHandler" />-->
+<!--        <typeHandler handler="org.apache.ibatis.type.ZonedDateTimeTypeHandler" />-->
+<!--    </typeHandlers>-->
     <!--
 plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
 properties?, settings?,
@@ -45,16 +55,19 @@ environments?, databaseIdProvider?, mappers?
                 <property name="driverClassName" value="${jdbc.driver}"/>
                 <property name="username" value="${jdbc.username}"/>
                 <property name="password" value="${jdbc.password}"/>
-                <property name="password" value="123456"/>
-                <property name="initialSize" value="10"/>
-                <property name="maxActive" value="20"/>
+                <property name="initialSize" value="${jdbc.initialSize}"/>
+                <property name="maxActive" value="${jdbc.maxActive}"/>
 
             </dataSource>
         </environment>
     </environments>
     <mappers>
         <package name="com.xxx.mapper"/>
+
+<!--        <mapper resource="com/xxx/mapper/UserMapper.xml"></mapper>-->
     </mappers>
+
+
 
 
 </configuration>
